@@ -1,5 +1,3 @@
-const headerContainer = document.querySelector('.header-container');
-
 const Header = (title, date, temp) => {
   // TASK 1
   // ---------------------
@@ -40,11 +38,9 @@ const headerAppender = (selector) => {
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
-  const header = document.createElement('header');
+  const select = document.querySelector(selector);
 
-  header.appendChild(Header('Lambda Times', 'October 22, 2021', '56°'))
-
-  headerContainer.append(header)
+  select.appendChild(Header('Lambda Times', 'October 22, 2021', '56°'))
 }
 
 export { Header, headerAppender }
