@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,7 +19,36 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+
+  const divCard = document.createElement('div');
+  const divHeadline = document.createElement('div');
+  const divAuthor = document.createElement('div');
+  const divImgCont = document.createElement('div');
+  const image = document.createElement('img');
+  const spanName = document.createElement('span');
+
+  divCard.classList.add('card');
+  divHeadline.classList.add('headline');
+  divAuthor.classList.add('author');
+  divImgCont.classList.add('img-container');
+
+  divHeadline.textContent = article.headline;
+  image.src = article.authorPhoto;
+  spanName.textContent = article.authorName;
+
+  divCard.appendChild(divHeadline);
+  divCard.appendChild(divAuthor);
+  divAuthor.appendChild(divImgCont);
+  divAuthor.appendChild(spanName);
+  divImgCont.appendChild(image);
+
+  divCard.addEventListener('click', event => {
+    console.log(event.target.divHeadline);
+  })
+
+  return divCard
 }
+
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -28,6 +59,47 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+  const select = document.querySelector(selector);
+
+  axios
+    .get(`http://localhost:5001/api/articles`)
+    .then(res => {
+      const articlesObj = res.data.articles;
+
+      const bootArr = Array.from(articlesObj.bootstrap)
+      const jsArr = Array.from(articlesObj.javascript)
+      const techArr = Array.from(articlesObj.technology)
+      const jqArr = Array.from(articlesObj.jquery)
+      const nodeArr = Array.from(articlesObj.node)
+
+      jsArr.forEach(element => {
+        const cards = Card(element);
+        select.appendChild(cards);
+      })
+
+      bootArr.forEach(element => {
+        const cards = Card(element);
+        select.appendChild(cards);
+      })
+
+      techArr.forEach(element => {
+        const cards = Card(element);
+        select.appendChild(cards);
+      })
+
+      jqArr.forEach(element => {
+        const cards = Card(element);
+        select.appendChild(cards);
+      })
+
+      nodeArr.forEach(element => {
+        const cards = Card(element);
+        select.appendChild(cards);
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
 }
 
 export { Card, cardAppender }
