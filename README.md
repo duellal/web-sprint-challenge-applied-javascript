@@ -73,7 +73,7 @@ An event is when something on the webpage happens after being triggered by somet
 
 3. What is an event listener?
 
-An event listener is an event that waits for something specific to happen, such as a mouse click, a key being pressed down, or when something loads. 
+An event listener is a function that waits for an event to happen, such as a mouse click, a key being pressed down, or when something loads. The function then executes what should happen after the event is executed.
 
 4. Why would we convert a NodeList into an Array?
 
